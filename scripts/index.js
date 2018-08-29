@@ -5,8 +5,13 @@ $(document).ready(function() {
   api.getItems((items)=> {
     items.forEach(item => {
       store.addItem(item);
-      shoppingList.render();
     });
+    //test code
+    const item = store.items[0];
+	console.log('current name: ' + item.name);
+	store.findAndUpdate(item.id, { name: 'qwe' });
+	console.log('new name: ' + item.name);
+	//end test code
   });
   
   shoppingList.bindEventListeners();
@@ -20,3 +25,5 @@ api.getItems((items) => {
     console.log('updated!');
   });
 });
+
+
