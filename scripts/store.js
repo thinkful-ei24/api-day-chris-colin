@@ -13,10 +13,10 @@ const store = (function(){
     return this.items.find(item => item.id === id);
   };
 
-  // const findAndToggleChecked = function(id) {
-  //   const item = this.findById(id);
-  //   item.checked = !item.checked;
-  // };
+  const findAndToggleChecked = function(id) {
+    const item = this.findById(id);
+    item.checked = !item.checked;
+  };
 
   const findAndDelete = function(id) {
     this.items = this.items.filter(item => item.id !== id);
@@ -54,7 +54,7 @@ const store = (function(){
 
     addItem,
     findById,
-    //findAndToggleChecked,
+    findAndToggleChecked,
     findAndDelete,
     //findAndUpdateName,
     toggleCheckedFilter,

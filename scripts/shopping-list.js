@@ -79,7 +79,8 @@ const shoppingList = (function(){
   function handleItemCheckClicked() {
     $('.js-shopping-list').on('click', '.js-item-toggle', event => {
       const id = getItemIdFromElement(event.currentTarget);
-      store.findAndToggleChecked(id);
+      const checkedId = store.findById(id);
+      api.updateItem(id, {checked:!checkedId.checked}, store.findAndUpdate(id, {checked:!checkedId.checked}));
       render();
     });
   }
@@ -91,7 +92,9 @@ const shoppingList = (function(){
       const id = getItemIdFromElement(event.currentTarget);
       // delete the item
       store.findAndDelete(id);
-      // render the updated shopping list
+      //refactor line below for delete in api and store
+      // api.updateItem(id, {checked:!checkedId.checked}, store.findAndUpdate(id, {checked:!checkedId.checked}));
+
       render();
     });
   }
@@ -101,11 +104,10 @@ const shoppingList = (function(){
       event.preventDefault();
       const id = getItemIdFromElement(event.currentTarget);
       const itemName = $(event.currentTarget).find('.shopping-item').val();
-      api.updateItem(id, itemName, store.findAndUpdate(id, itemName));
-      //store.findAndUpdateName(id, itemName);     
+      api.updateItem(id, {name:itemName}, store.findAndUpdate(id, {name:itemName}));
     });
   }
-  
+
   function handleToggleFilterClick() {
     $('.js-filter-checked').click(() => {
       store.toggleCheckedFilter();
