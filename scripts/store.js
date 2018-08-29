@@ -1,15 +1,13 @@
 /* global Item */
+'use strict';
 
 // eslint-disable-next-line no-unused-vars
 const store = (function(){
-  const addItem = function(name) {
-    try {
-      Item.validateName(name);
-      this.items.push(Item.create(name));
-    } catch(e) {
-      console.log(e.message);
-    }
-  };
+  const items = [];
+  const addItem = function(item) {
+    this.items.push(item);
+    };
+  
 
   const findById = function(id) {
     return this.items.find(item => item.id === id);
@@ -43,7 +41,7 @@ const store = (function(){
   };
 
   return {
-    items: [],
+    items,
     hideCheckedItems: false,
     searchTerm: '',
 
@@ -56,4 +54,4 @@ const store = (function(){
     setSearchTerm,
   };
   
-}());
+})();
